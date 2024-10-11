@@ -5,7 +5,7 @@ beautifulsoup4>=4.12.3
 PyPDF2==3.0.1
 python-pptx==0.6.21
 openai 
-ollama
+ollama==0.1.5
 llama_index>=0.9
 langchain_community
 youtube_transcript_api
