@@ -5,7 +5,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
 # Initialize Ollama LLM
-ollama_llm = Ollama(model="llama3.2", request_timeout=60)
+ollama_llm = Ollama(model="llama3.2")
 
 
 def generate_question_from_chunk(chunk):

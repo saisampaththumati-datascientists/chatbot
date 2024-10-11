@@ -14,7 +14,7 @@ from pptx.util import Pt, Inches
 from pptx.dml.color import RGBColor
 from typing import List
 # Initialize Ollama LLM
-ollama_llm = Ollama(model="llama3.2", request_timeout=60)
+ollama_llm = Ollama(model="llama3.2")
 
 # Function to check if the URL is a YouTube link
 def is_youtube_url(url):
