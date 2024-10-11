@@ -3,7 +3,7 @@ from llama_index.llms.ollama import Ollama
 from langchain_community.tools import DuckDuckGoSearchResults
 
 # Create an instance of the Ollama LLM
-llm = Ollama(model="llama3.2", request_timeout=60)
+llm = Ollama(model="llama3.2")
 
 # Initialize DuckDuckGo search tool
 tool = DuckDuckGoSearchResults()

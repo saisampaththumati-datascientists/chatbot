@@ -1,8 +1,13 @@
 streamlit==1.25.0
-scikit-learn==1.2.2
+scikit-learn
 requests==2.31.0
 beautifulsoup4==4.12.2
 PyPDF2==3.0.1
 python-pptx==0.6.21
 openai==0.27.6
 ollama==0.1.5
+llama_index
+langchain_community
+youtube_transcript_api
+setuptools
+duckduckgo-search
