@@ -5,5 +5,5 @@ import ollama
 from langchain_ollama import OllamaLLM
 
 def get_llm_instance():
-    llm = OllamaLLM(model="llama3.1", temperature=0)
+    llm = OllamaLLM(model="llama3.1", temperature=0,base_url="http://localhost:11434")
     return llm
