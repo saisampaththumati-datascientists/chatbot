@@ -81,7 +81,7 @@ def refine_response(search_results, original_query):
         prompt += "Please provide a polite, well-structured, and concise response based on the information above."
 
         # Assuming the `llm` instance has a method `generate` instead of `invoke`
-        refined_response = llm.generate(input=prompt)
+        refined_response = llm.generate(prompt)
 
         # Check the structure of the response from llm
         if refined_response and hasattr(refined_response, "text"):

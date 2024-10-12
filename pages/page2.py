@@ -11,19 +11,22 @@ ollama_llm = get_llm_instance()
 
 def generate_question_from_chunk(chunk):
     prompt = f"Create a question based on this content: {chunk}"
-    response = ollama_llm.invoke(input=prompt)  # Pass the prompt as input
+    response = ollama_llm(prompt)  # Pass the prompt as input
+    response=response["choices"][0]["text"]
     return response.get("text", "No question generated.") if isinstance(response, dict) else response
 
 
 def answer_question_with_llm(question, chunk):
     prompt = f"Answer the following question based on the provided text: \n\nText: {chunk}\n\nQuestion: {question}"
-    response = ollama_llm.invoke(input=prompt)  # Pass the prompt as input
+    response = ollama_llm(prompt)  # Pass the prompt as input
+    response=response["choices"][0]["text"]
     return response.get("text", "No answer generated.") if isinstance(response, dict) else response
 
 
 def create_multiple_choice_question(chunk):
     prompt = f"Create a multiple-choice question with 4 options based on this text: {chunk}"
-    response = ollama_llm.invoke(input=prompt)  # Pass the prompt as input
+    response = ollama_llm(prompt)  # Pass the prompt as input
+    response=response["choices"][0]["text"]
     return response.get("text", "No question generated.") if isinstance(response, dict) else response
 
 def find_best_matching_chunk(question, chunks):

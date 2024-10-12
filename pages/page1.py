@@ -9,7 +9,6 @@ import requests
 from bs4 import BeautifulSoup
 import numpy as np
 import re 
-from pptx import Presentation
 from pptx.util import Pt, Inches
 from pptx.dml.color import RGBColor
 from typing import List
@@ -72,14 +71,14 @@ def process_chunk_with_llm(chunk, task_type="summary"):
             "heading": f"Create a concise single heading for this content: {chunk}"
         }
         # Ensure the prompt is correctly passed as input
-        response = ollama_llm.invoke(input=prompt_map.get(task_type, "Unsupported task type."))
+        response = ollama_llm(prompt_map.get(task_type, "Unsupported task type."))
         
         if isinstance(response, dict) and "text" in response:
             return response["choices"][0]["text"]
         elif isinstance(response, str):
-            return response
+            return response["choices"][0]["text"]
         else:
-            return f"Unexpected response format: {response}"
+            return f"Unexpected response format: {response["choices"][0]["text"]}"
     except Exception as e:
         return f"Error processing chunk with LLM: {str(e)}"
 
