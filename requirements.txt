@@ -12,5 +12,7 @@ langchain_community
 youtube_transcript_api
 setuptools
 duckduckgo-search
-llama-cpp-python
+llama-cpp-python 
 huggingface_hub
+
+

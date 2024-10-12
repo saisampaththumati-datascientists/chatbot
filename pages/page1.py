@@ -72,13 +72,13 @@ def process_chunk_with_llm(chunk, task_type="summary"):
         }
         # Ensure the prompt is correctly passed as input
         response = ollama_llm(prompt_map.get(task_type, "Unsupported task type."))
-        
+        response=response["choices"][0]["text"]
         if isinstance(response, dict) and "text" in response:
-            return response["choices"][0]["text"]
+            return response
         elif isinstance(response, str):
-            return response["choices"][0]["text"]
+            return response
         else:
-            return f"Unexpected response format: {response["choices"][0]["text"]}"
+            return f"Unexpected response format: {response}"
     except Exception as e:
         return f"Error processing chunk with LLM: {str(e)}"
 
@@ -230,7 +230,7 @@ def page1():
 
         if text_data:
             st.write(f"Extracted Text Data Length: {len(text_data)} characters")
-            chunks = split_text_into_chunks(text_data, chunk_size=500)
+            chunks = split_text_into_chunks(text_data, chunk_size=300)
             st.write(f"Number of chunks created: {len(chunks)}")
 
             processed_results = []
