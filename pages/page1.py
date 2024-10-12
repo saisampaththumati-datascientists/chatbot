@@ -71,8 +71,8 @@ def process_chunk_with_llm(chunk, task_type="summary"):
             "heading": f"Create a concise single heading for this content: {chunk}"
         }
         # Ensure the prompt is correctly passed as input
-        response = ollama_llm(prompt_map.get(task_type, "Unsupported task type."))
-        response=response["choices"][0]["text"]
+        response = ollama_llm.invoke(prompt_map.get(task_type, "Unsupported task type."))
+        response=response
         if isinstance(response, dict) and "text" in response:
             return response
         elif isinstance(response, str):

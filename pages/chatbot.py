@@ -1,7 +1,9 @@
 import streamlit as st
 from langchain_community.tools import DuckDuckGoSearchResults
 from .llm_instance import get_llm_instance
+
 # Create an instance of the Ollama LLM
+
 llm = get_llm_instance()
 
 # Initialize DuckDuckGo search tool
@@ -81,7 +83,7 @@ def refine_response(search_results, original_query):
         prompt += "Please provide a polite, well-structured, and concise response based on the information above."
 
         # Assuming the `llm` instance has a method `generate` instead of `invoke`
-        refined_response = llm.generate(prompt)
+        refined_response = llm.invoke(prompt)
 
         # Check the structure of the response from llm
         if refined_response and hasattr(refined_response, "text"):

@@ -8,11 +8,15 @@ openai
 ollama
 llama_index>=0.9
 llama-index-llms-ollama
-langchain_community
 youtube_transcript_api
 setuptools
 duckduckgo-search
-llama-cpp-python 
+llama-cpp-python
 huggingface_hub
-
+ollama 
+llama_index 
+langchain
+langchain_ollama
+langchain-core
+langchain-community
 
