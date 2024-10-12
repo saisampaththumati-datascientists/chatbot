@@ -3,28 +3,28 @@ from llama_index.llms.ollama import Ollama
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
+from .llm_instance import get_llm_instance
 
 # Initialize Ollama LLM
-ollama_llm = Ollama(model="llama3.2")
+ollama_llm = get_llm_instance()
 
 
 def generate_question_from_chunk(chunk):
     prompt = f"Create a question based on this content: {chunk}"
-    response = ollama_llm.complete(prompt=prompt)
+    response = ollama_llm.invoke(input=prompt)  # Pass the prompt as input
     return response.get("text", "No question generated.") if isinstance(response, dict) else response
 
 
 def answer_question_with_llm(question, chunk):
     prompt = f"Answer the following question based on the provided text: \n\nText: {chunk}\n\nQuestion: {question}"
-    response = ollama_llm.complete(prompt=prompt)
+    response = ollama_llm.invoke(input=prompt)  # Pass the prompt as input
     return response.get("text", "No answer generated.") if isinstance(response, dict) else response
 
 
 def create_multiple_choice_question(chunk):
     prompt = f"Create a multiple-choice question with 4 options based on this text: {chunk}"
-    response = ollama_llm.complete(prompt=prompt)
+    response = ollama_llm.invoke(input=prompt)  # Pass the prompt as input
     return response.get("text", "No question generated.") if isinstance(response, dict) else response
-
 
 def find_best_matching_chunk(question, chunks):
     vectorizer = TfidfVectorizer()

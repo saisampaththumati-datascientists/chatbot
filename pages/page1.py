@@ -13,8 +13,9 @@ from pptx import Presentation
 from pptx.util import Pt, Inches
 from pptx.dml.color import RGBColor
 from typing import List
+from .llm_instance import get_llm_instance
 # Initialize Ollama LLM
-ollama_llm = Ollama(model="llama3.2")
+ollama_llm = get_llm_instance()
 
 # Function to check if the URL is a YouTube link
 def is_youtube_url(url):
@@ -70,10 +71,11 @@ def process_chunk_with_llm(chunk, task_type="summary"):
             "translate": f"Translate this text to English: {chunk}",
             "heading": f"Create a concise single heading for this content: {chunk}"
         }
-        response = ollama_llm.complete(prompt=prompt_map.get(task_type, "Unsupported task type."))
+        # Ensure the prompt is correctly passed as input
+        response = ollama_llm.invoke(input=prompt_map.get(task_type, "Unsupported task type."))
         
         if isinstance(response, dict) and "text" in response:
-            return response["text"]
+            return response["choices"][0]["text"]
         elif isinstance(response, str):
             return response
         else:

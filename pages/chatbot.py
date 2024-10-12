@@ -1,9 +1,8 @@
 import streamlit as st
-from llama_index.llms.ollama import Ollama
 from langchain_community.tools import DuckDuckGoSearchResults
-
+from .llm_instance import get_llm_instance
 # Create an instance of the Ollama LLM
-llm = Ollama(model="llama3.2")
+llm = get_llm_instance()
 
 # Initialize DuckDuckGo search tool
 tool = DuckDuckGoSearchResults()
@@ -75,17 +74,21 @@ def duckduckgo_search(query):
         return f"Error during DuckDuckGo search: {str(e)}"
 
 # Function to refine the response to ensure it's polite and appropriate
+# Function to refine the response to ensure it's polite and appropriate
 def refine_response(search_results, original_query):
     try:
         prompt = f"You just performed a search for: '{original_query}'. Here are the results:\n\n{search_results}\n\n"
         prompt += "Please provide a polite, well-structured, and concise response based on the information above."
-        
-        refined_response = llm.complete(prompt)
 
-        if refined_response:
-            return refined_response
+        # Assuming the `llm` instance has a method `generate` instead of `invoke`
+        refined_response = llm.generate(input=prompt)
+
+        # Check the structure of the response from llm
+        if refined_response and hasattr(refined_response, "text"):
+            return refined_response.text
         else:
             return "No refined response received."
     except Exception as e:
         return f"Error refining response: {str(e)}"
+
 
